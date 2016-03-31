@@ -1,5 +1,5 @@
 class Api::V1::ProductsController < ApplicationController
-  before_action :authenticate_with_token!, only: [:create]
+  before_action :authenticate_with_token!, only: [:create, :update, :destroy]
 
   def show
     respond_with Product.find(params[:id])
@@ -33,8 +33,12 @@ class Api::V1::ProductsController < ApplicationController
 
   def destroy
     product = current_user.products.find(params[:id])
-    product.destroy
-    head 204
+    if product
+      product.destroy
+      head 204
+    else
+      respond_with 422
+    end
   end
 
   private

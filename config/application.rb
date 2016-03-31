@@ -25,11 +25,21 @@ module Jobberwocky
 
     config.autoload_paths += %W(#{config.root}/lib)
 
-    config.middleware.insert_before ActionDispatch::Static, Rack::Cors do
+    config.middleware.insert_before 'Rack::Runtime', 'Rack::Cors' do
       allow do
-        origins 'http://localhost:5000'
-        resource '/users/*', :headers => :any, :methods => [:get, :post, :delete]
+        origins '*'
+        resource '*',
+                 headers: :any,
+                 methods: [:get, :put, :post, :patch, :delete, :options]
       end
     end
+
+    config.middleware.insert_before 'Rack::Runtime', 'Rack::Cors' do
+      allow do
+        origins 'http://localhost:8080'
+        resource '*', :headers => :any, :methods => [:get, :post, :delete, :options]
+      end
+    end
+
   end
 end

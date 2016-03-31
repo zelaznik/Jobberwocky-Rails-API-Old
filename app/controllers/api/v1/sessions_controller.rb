@@ -1,4 +1,6 @@
 class Api::V1::SessionsController < ApplicationController
+  allow_cors :create, :destroy
+  before_filter :authenticate_with_token!, only: :destroy
 
   def create
     user_email = session_params[:email]
