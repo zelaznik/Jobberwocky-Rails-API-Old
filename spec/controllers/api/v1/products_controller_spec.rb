@@ -65,4 +65,55 @@ describe Api::V1::ProductsController do
       it { should respond_with 422 }
     end
   end
+
+  describe "PUT/PATCH #update" do
+    before(:each) do
+      @user = FactoryGirl.create :user
+      @product = FactoryGirl.create :product, user: @user
+      api_authorization_header @user.auth_token
+    end
+
+    context "when is successfully updated" do
+      before(:each) do
+        patch :update, {
+          user_id: @user.id, id: @product.id,
+          product: { title: "An expensive TV" } }
+      end
+
+      it "renders the json representation for the updated user" do
+        expect(json_response[:title]).to eql "An expensive TV"
+      end
+
+      it { should respond_with 200 }
+    end
+
+    context "when is not updated" do
+      before(:each) do
+        patch :update, {
+          user_id: @user.id, id: @product.id,
+          product: { price: "two hundred" } }
+      end
+
+      it "renders an errors json" do
+        expect(json_response).to have_key(:errors)
+      end
+
+      it "renders the json errors on when the user could not be created" do
+        expect(json_response[:errors][:price]).to include "is not a number"
+      end
+
+      it { should respond_with 422 }
+    end
+  end
+
+  describe "DELETE #destroy" do
+    before(:each) do
+      @user = FactoryGirl.create :user
+      @product = FactoryGirl.create :product, user: @user
+      api_authorization_header @user.auth_token
+      delete :destroy, { user_id: @user.id, id: @product.id }
+    end
+
+    it { should respond_with 204 }
+  end
 end
