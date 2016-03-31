@@ -5,6 +5,6 @@ FactoryGirl.define do
     title { Faker::Product.product_name }
     price { rand() * 100 }
     published false
-    user { FactoryGirl.build(:user) }
+    user { FactoryGirl.create :user }
   end
 end
