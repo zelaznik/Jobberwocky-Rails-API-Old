@@ -1,10 +1,10 @@
 class Api::V1::SessionsController < ApplicationController
-  def create
-    user_password = params[:session][:password]
-    user_email = params[:session][:email]
-    user = user_email.present? && User.find_by(email: user_email)
 
-    if user.valid_password?(user_password)
+  def create
+    user_email = session_params[:email]
+    user_password = session_params[:password]
+    user = User.find_by(email: user_email)
+    if user && user.valid_password?(user_password)
       sign_in user, store: false
       user.generate_authentication_token!
       user.save
@@ -16,11 +16,14 @@ class Api::V1::SessionsController < ApplicationController
 
   def destroy
     user = User.find_by(auth_token: params[:id])
-    user.generate_authentication_token!
-    user.save
+    if user
+      user.generate_authentication_token!
+      user.save
+    end
     head 204
   end
 
-  
-
+  def session_params
+    params.require(:session).permit(:email, :password)
+  end
 end
