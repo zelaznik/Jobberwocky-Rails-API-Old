@@ -27,7 +27,7 @@ module Jobberwocky
 
     config.middleware.insert_before ActionDispatch::Static, Rack::Cors do
       allow do
-        origins 'http://localhost:8080'
+        origins 'http://localhost:5000'
         resource '/users/*', :headers => :any, :methods => [:get, :post, :delete]
       end
     end

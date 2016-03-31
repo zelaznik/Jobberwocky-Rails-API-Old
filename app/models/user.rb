@@ -1,10 +1,9 @@
 class User < ActiveRecord::Base
   before_create :generate_authentication_token!
-
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   validates :auth_token, uniqueness: true
-
+  has_many :products, inverse_of: :user, dependent: :destroy
 
   def generate_authentication_token!
     begin

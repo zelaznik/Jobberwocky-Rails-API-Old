@@ -6,7 +6,7 @@ run Rails.application
 require 'rack/cors'
 use Rack::Cors do
   allow do
-    origins 'localhost:3000', '127.0.0.1:3000', 'localhost:8080'
+    origins 'localhost:3000', '127.0.0.1:3000', 'localhost:8080', 'localhost:5000'
     resource '/file/list_all/', :headers => 'x-domain-token'
     resource '/file/at/*',
         :methods => [:get, :post, :delete, :put, :patch, :options, :head],
