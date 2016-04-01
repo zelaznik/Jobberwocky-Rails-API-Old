@@ -13,7 +13,6 @@ class ApplicationController < ActionController::Base
   def self.allow_cors(*methods)
     self.cors_allowed_actions += methods
     before_filter :cors_before_filter, :only => methods
-    # protect_from_forgery with: :null_session, :only => methods
   end
 
 end
