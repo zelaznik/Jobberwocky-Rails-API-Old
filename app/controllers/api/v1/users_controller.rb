@@ -5,6 +5,10 @@ class Api::V1::UsersController < ApplicationController
     respond_with User.find(params[:id])
   end
 
+  def index
+    respond_with User.all
+  end
+
   def create
     user = User.new(user_params)
     if user.save

@@ -20,6 +20,49 @@ describe Api::V1::UsersController do
     it { should respond_with 200 }
   end
 
+  describe "GET #index" do
+    before(:each) do
+      @origCount = User.count
+      @users = []
+      4.times do
+        @user = FactoryGirl.create :user
+        @user.save!
+        3.times do
+          product = FactoryGirl.build :product, user: @user
+          product.save!
+        end
+        @users << @user
+      end
+      @newCount = @origCount + @users.length
+      get :index
+    end
+
+    it "returns 4 records from the database" do
+      expect(json_response[:users]).to have(@newCount).items
+    end
+
+    it "returns product ids for each user" do
+      json_response[:users].each do |user|
+        expected = User.find(user[:id]).products.map(&:id).sort
+        expect(user[:product_ids].sort).to eql expected
+      end
+    end
+
+    it "does not pass the auth_token" do
+      json_response[:users].each do |user|
+        expect(user[:auth_token]).to eql nil
+      end
+    end
+
+    it "does not pass the password" do
+      json_response[:users].each do |user|
+        expect(user[:password]).to eql nil
+      end
+    end
+
+    it { should respond_with 200 }
+  end
+
   describe "POST #create" do
 
     context "when is successfully created" do
