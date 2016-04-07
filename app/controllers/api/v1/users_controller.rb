@@ -15,7 +15,7 @@ class Api::V1::UsersController < ApplicationController
       user.generate_authentication_token!
       user.save
       data = {user: {id: user.id, email: user.email, auth_token: user.auth_token}}
-      render json: data, status: 201, location: [:api, user]
+      render json: data, status: 201, location: [:api, user] #, serializer: CurrentUserSerializer
     else
       render json: { errors: user.errors }, status: 422
     end

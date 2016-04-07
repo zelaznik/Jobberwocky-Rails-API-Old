@@ -8,7 +8,7 @@ describe Product do
   it { should respond_to(:published) }
   it { should respond_to(:user_id) }
 
-  it { should have_many(:placements) }
+  it { should have_many(:placements).dependent(:restrict) }
   it { should have_many(:orders).through(:placements) }
 
   it "should not be published" do

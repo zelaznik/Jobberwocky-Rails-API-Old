@@ -3,7 +3,7 @@ class Order < ActiveRecord::Base
   before_save :set_total!
 
   belongs_to :user
-  has_many :placements
+  has_many :placements, dependent: :destroy
   has_many :products, through: :placements
 
   def total

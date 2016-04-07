@@ -19,8 +19,8 @@ describe User do
 
   it { should be_valid }
 
-  it { should have_many(:products) }
-  it { should have_many(:orders) }
+  it { should have_many(:products).dependent(:restrict) }
+  it { should have_many(:orders).dependent(:destroy) }
 
   describe "#generate_authentication_token!" do
     it "generates a unique token" do

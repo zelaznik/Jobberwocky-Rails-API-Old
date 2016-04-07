@@ -13,7 +13,7 @@ describe Order do
 
   it { should belong_to :user }
 
-  it { should have_many(:placements) }
+  it { should have_many(:placements).dependent(:destroy) }
   it { should have_many(:products).through(:placements) }
 
   describe ".total" do
