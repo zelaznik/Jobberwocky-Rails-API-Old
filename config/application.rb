@@ -23,6 +23,8 @@ module Jobberwocky
       g.helper = false
     end
 
+    config.i18n.enforce_available_locales = false
+
     config.autoload_paths += %W(#{config.root}/lib)
 
     config.middleware.insert_before 'Rack::Runtime', 'Rack::Cors' do
