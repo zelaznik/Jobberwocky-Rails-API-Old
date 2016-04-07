@@ -6,9 +6,12 @@ Jobberwocky::Application.routes.draw do
       match '*/*' => 'cors#preflight', :via => :options
 
       resource :sessions, only: [:create, :destroy]
-      resources :users, only: [:show, :create, :update, :destroy]
-      resources :products, only: [:show, :index, :create, :update, :destroy]
-
+      resources :users, only: [:show, :create, :update, :destroy] do
+        resources :products, only: [:create, :update, :destroy]
+        resources :orders, :only => [:index, :show, :create]
+      end
+      resources :products, only: [:show, :index]
+      resources :orders, :only => [:index, :show, :create]
       devise_for :users
     end
   end
