@@ -9,6 +9,7 @@
 
 # Ignore secrets.yml
 /config/secrets.yml
+.idea*
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
