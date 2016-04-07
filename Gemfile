@@ -35,7 +35,7 @@ group :development do
   gem 'pry-rails'
 end
 
-group :development, :test do
+group :development, :test, :production do
   gem "factory_girl_rails"
   gem 'ffaker'
 end
