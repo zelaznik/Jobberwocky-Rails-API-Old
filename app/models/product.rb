@@ -1,5 +1,9 @@
 class Product < ActiveRecord::Base
   belongs_to :user, inverse_of: :products
+
+  has_many :placements
+  has_many :orders, through: :placements
+
   validates :title, :user_id, presence: true
   validates :price, presence: true,
             numericality: { gerater_than_or_equal_to: 0}
