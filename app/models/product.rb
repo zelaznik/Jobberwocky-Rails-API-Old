@@ -2,7 +2,7 @@ class Product < ActiveRecord::Base
   validates :title, :user_id, presence: true
   validates :price, presence: true, numericality: { gerater_than_or_equal_to: 0}
 
-  has_many :placements, dependent: :restrict
+  has_many :placements, dependent: :restrict_with_exception
   has_many :orders, through: :placements
   belongs_to :user, inverse_of: :products
 

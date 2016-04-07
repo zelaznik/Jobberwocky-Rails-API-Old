@@ -19,7 +19,7 @@ describe User do
 
   it { should be_valid }
 
-  it { should have_many(:products).dependent(:restrict) }
+  it { should have_many(:products).dependent(:restrict_with_exception) }
   it { should have_many(:orders).dependent(:destroy) }
 
   describe "#generate_authentication_token!" do

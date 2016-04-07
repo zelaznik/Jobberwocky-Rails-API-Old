@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   validates :auth_token, uniqueness: true
 
-  has_many :products, dependent: :restrict
+  has_many :products, dependent: :restrict_with_exception
   has_many :orders, dependent: :destroy
 
   def generate_authentication_token!
