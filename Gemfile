@@ -31,11 +31,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-group :development do
-  gem 'pry-rails'
-end
-
-group :development, :test, :production do
+group :development, :test do
   gem "factory_girl_rails"
   gem 'ffaker'
 end
@@ -47,6 +43,9 @@ group :test do
 end
 
 gem "devise", '~> 3.2.4'
+gem 'omniauth'
+gem 'omniauth-github'
+gem 'omniauth-facebook'
 
 # Sabisu gems
 gem 'sabisu_rails', github: "IcaliaLabs/sabisu-rails"
@@ -54,15 +53,3 @@ gem 'compass-rails'
 gem 'furatto'
 gem 'font-awesome-rails'
 gem 'simple_form'
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]

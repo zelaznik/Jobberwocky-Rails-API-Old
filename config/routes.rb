@@ -6,12 +6,12 @@ Jobberwocky::Application.routes.draw do
       match '*/*' => 'cors#preflight', :via => :options
 
       resource :sessions, only: [:create, :destroy]
+      devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
       resources :users, only: [:show, :index, :create, :update, :destroy] do
         resources :products, only:  [:create, :update, :destroy]
-        resources :orders, :only => [:create, :index, :show]
+        resources :orders, only: [:create, :index, :show]
       end
       resources :products, only: [:show, :index]
-      devise_for :users
     end
   end
 end
