@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :product do
     title { Faker::Product.product_name }
     price { rand() * 100 }
-    published { (rand()*2 <= 1) }
+    published { false }
     user { FactoryGirl.create :user }
   end
 end
