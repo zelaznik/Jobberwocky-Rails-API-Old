@@ -8,7 +8,6 @@ class Api::V1::UsersController < ApplicationController
   def create
     user = User.new(user_params)
     if user.save
-      sign_in user, store: false
       user.generate_authentication_token!
       user.save
       data = {user: {id: user.id, email: user.email, auth_token: user.auth_token}}

@@ -5,7 +5,7 @@ Jobberwocky::Application.routes.draw do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
       match '*/*' => 'cors#preflight', :via => :options
 
-      resource :sessions
+      resource :sessions, only: [:create, :destroy]
       resources :users, only: [:show, :create, :update, :destroy]
       resources :products, only: [:show, :index, :create, :update, :destroy]
 
