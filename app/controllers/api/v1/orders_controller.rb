@@ -2,6 +2,10 @@ class Api::V1::OrdersController < ApplicationController
   before_action :authenticate_with_token!
   respond_to :json
 
+  def show
+    respond_with current_user.orders.find(params[:id])
+  end
+
   def create
     order = current_user.orders.build(order_params)
 

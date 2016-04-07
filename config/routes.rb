@@ -7,11 +7,10 @@ Jobberwocky::Application.routes.draw do
 
       resource :sessions, only: [:create, :destroy]
       resources :users, only: [:show, :create, :update, :destroy] do
-        resources :products, only: [:create, :update, :destroy]
-        resources :orders, :only => [:index, :show, :create]
+        resources :products, only:  [:create, :update, :destroy]
+        resources :orders, :only => [:create, :index, :show]
       end
       resources :products, only: [:show, :index]
-      resources :orders, :only => [:index, :show, :create]
       devise_for :users
     end
   end
