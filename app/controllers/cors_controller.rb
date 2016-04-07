@@ -22,7 +22,7 @@ class CorsController < ApplicationController
         headers['Access-Control-Allow-Headers'] = request.headers['Access-Control-Request-Headers']
         headers['Access-Control-Allow-Origin']  = request.headers['Origin']
         headers['Access-Control-Allow-Methods'] = http_request_verb
-        headers['Access-Control-Max-Age']       = (60*60*24)
+        headers['Access-Control-Max-Age'] = '1728000'
         headers['Source-Code'] = 'CorsController'
       end
 
