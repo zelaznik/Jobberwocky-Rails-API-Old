@@ -7,17 +7,16 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 ActiveRecord::Base.transaction do
-  Product.all.each { |u| u.destroy! }
-  User.all.each { |u| u.destroy! }
-
-
-  steve = User.create! id: 1, email: 'zelaznik@yahoo.com', password: 'password'
-  25.times do |i|
-    product = FactoryGirl.create :product, user: steve
+  [Placement,Order,Product,User].each do |model|
+    model.all.each {|record| record.destroy! }
   end
 
+  steve = User.create! id: 1, email: 'zelaznik@yahoo.com', password: 'password'
+  25.times { product = FactoryGirl.create :product, user: steve }
+
   (2...8).each do |i|
-    user = FactoryGirl.create :user
+    user = FactoryGirl.create :user, id: i
+    6.times { product = FactoryGirl.create :product, user: user }
   end
 
 end

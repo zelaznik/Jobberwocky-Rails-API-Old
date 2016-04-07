@@ -22,23 +22,16 @@ describe Api::V1::UsersController do
 
   describe "GET #index" do
     before(:each) do
-      @origCount = User.count
-      @users = []
+      @expected = User.count
       4.times do
-        @user = FactoryGirl.create :user
-        @user.save!
-        3.times do
-          product = FactoryGirl.build :product, user: @user
-          product.save!
-        end
-        @users << @user
+        FactoryGirl.create :user
+        @expected += 1
       end
-      @newCount = @origCount + @users.length
       get :index
     end
 
     it "returns 4 records from the database" do
-      expect(json_response[:users]).to have(@newCount).items
+      expect(json_response[:users]).to have(@expected).items
     end
 
     it "returns product ids for each user" do
@@ -64,7 +57,6 @@ describe Api::V1::UsersController do
   end
 
   describe "POST #create" do
-
     context "when is successfully created" do
       before(:each) do
         @user_attributes = FactoryGirl.attributes_for :user
