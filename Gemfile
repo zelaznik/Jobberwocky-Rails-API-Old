@@ -13,6 +13,11 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+group :development do
+  gem 'pry-rails'
+  gem 'byebug'
+end
+
 group :development, :test do
   gem "factory_girl_rails"
   gem 'ffaker'
@@ -30,7 +35,6 @@ gem 'omniauth-github'
 gem 'omniauth-facebook'
 
 # Sabisu gems
-gem 'sabisu_rails', github: "IcaliaLabs/sabisu-rails"
 gem 'compass-rails'
 gem 'furatto'
 gem 'font-awesome-rails'
