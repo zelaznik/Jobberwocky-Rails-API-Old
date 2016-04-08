@@ -13,8 +13,8 @@ Bundler.require(:default, Rails.env)
 # This Rails Version Was Before secrets.yml so I made my own.
 def json_secrets
   return @secrets unless @secrets.nil?
-
   src = Rails.root.join('config', 'secrets.json')
+
   @secrets ||= File.open(src, 'r') do |f|
     all_values = JSON.parse(f.read)
     all_values[Rails.env].freeze

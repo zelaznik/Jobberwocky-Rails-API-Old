@@ -2,8 +2,8 @@ Jobberwocky::Application.configure do
   config.serve_static_assets = true
   config.cache_classes = true
   config.eager_load = true
-  config.consider_all_requests_local       = false
-  config.action_controller.perform_caching = true
+  config.consider_all_requests_local = false
+
   config.assets.js_compressor = :uglifier
   config.assets.compile = false
   config.assets.digest = true
@@ -13,4 +13,5 @@ Jobberwocky::Application.configure do
   config.active_support.deprecation = :notify
   config.log_formatter = ::Logger::Formatter.new
 
+  config.action_controller.perform_caching = true
 end
