@@ -1,0 +1,29 @@
+<h1>Listing static_companies</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Url</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @companies.each do |static_company| %>
+      <tr>
+        <td><%= static_company.name %></td>
+        <td><%= static_company.url %></td>
+        <td><%= link_to 'Show', static_company %></td>
+        <td><%= link_to 'Edit', edit_static_company_path(static_company) %></td>
+        <td><%= link_to 'Destroy', static_company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Company', new_static_company_path %>

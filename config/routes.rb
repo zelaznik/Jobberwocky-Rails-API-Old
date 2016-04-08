@@ -1,6 +1,12 @@
 require_relative '../lib/api_constraints.rb'
 
 Jobberwocky::Application.routes.draw do
+  namespace :static, defaults: { format: :html }, path: "/static" do
+    resources :job_applications
+    resources :statuses
+    resources :companies
+  end
+
   namespace :api, defaults: { format: :json }, path: "/"  do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
       match '*/*' => 'cors#preflight', :via => :options

@@ -1,0 +1,39 @@
+<h1>Listing static_job_applications</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Company</th>
+      <th>User</th>
+      <th>Job title</th>
+      <th>Url</th>
+      <th>First applied</th>
+      <th>Last update</th>
+      <th>Status</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @job_applications.each do |static_job_application| %>
+      <tr>
+        <td><%= static_job_application.company %></td>
+        <td><%= static_job_application.user %></td>
+        <td><%= static_job_application.job_title %></td>
+        <td><%= static_job_application.url %></td>
+        <td><%= static_job_application.first_applied %></td>
+        <td><%= static_job_application.last_update %></td>
+        <td><%= static_job_application.status %></td>
+        <td><%= link_to 'Show', static_job_application %></td>
+        <td><%= link_to 'Edit', edit_static_job_application_path(static_job_application) %></td>
+        <td><%= link_to 'Destroy', static_job_application, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Job application', new_static_job_application_path %>

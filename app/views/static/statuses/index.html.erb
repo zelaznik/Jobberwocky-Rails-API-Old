@@ -1,0 +1,27 @@
+<h1>Listing static_statuses</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Label</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @statuses.each do |static_status| %>
+      <tr>
+        <td><%= static_status.label %></td>
+        <td><%= link_to 'Show', static_status %></td>
+        <td><%= link_to 'Edit', edit_static_status_path(static_status) %></td>
+        <td><%= link_to 'Destroy', static_status, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Status', new_static_status_path %>
