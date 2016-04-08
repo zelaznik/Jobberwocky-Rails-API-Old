@@ -1,5 +1,5 @@
 class Static::JobApplicationsController < ApplicationController
-  before_action :set_static_job_application, only: [:show, :edit, :update, :destroy]
+  before_action :set_job_application, only: [:show, :edit, :update, :destroy]
 
   # GET /static/job_applications
   def index
@@ -21,10 +21,10 @@ class Static::JobApplicationsController < ApplicationController
 
   # POST /static/job_applications
   def create
-    @job_application = JobApplication.new(static_job_application_params)
+    @job_application = JobApplication.new(job_application_params)
 
     if @job_application.save
-      redirect_to @job_application, notice: 'Job application was successfully created.'
+      redirect_to static_job_applications_url(@job_application), notice: 'Job application was successfully created.'
     else
       render action: 'new'
     end
@@ -32,7 +32,7 @@ class Static::JobApplicationsController < ApplicationController
 
   # PATCH/PUT /static/job_applications/1
   def update
-    if @job_application.update(static_job_application_params)
+    if @job_application.update(job_application_params)
       redirect_to @job_application, notice: 'Job application was successfully updated.'
     else
       render action: 'edit'
@@ -47,12 +47,12 @@ class Static::JobApplicationsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_static_job_application
+    def set_job_application
       @job_application = JobApplication.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
-    def static_job_application_params
-      params.require(:static_job_application).permit(:company_id, :user_id, :job_title, :url, :first_applied, :last_update, :status_id)
+    def job_application_params
+      params.require(:job_application).permit(:company_id, :user_id, :job_title, :url, :first_applied, :last_update, :status_id)
     end
 end

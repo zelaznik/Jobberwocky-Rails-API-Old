@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :job_application, :class => 'JobApplication' do
-    company nil
-    user nil
+    company { FactoryGirl.create :company }
+    user { FactoryGirl.create :user }
     job_title "MyString"
     url "MyString"
     first_applied "2016-04-08"
