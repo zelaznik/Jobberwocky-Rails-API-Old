@@ -9,4 +9,7 @@ Jobberwocky::Application.configure do
   config.action_controller.allow_forgery_protection = false
   config.action_mailer.delivery_method = :test
   config.active_support.deprecation = :stderr
+
+  ENV['ROOT_URL'] = 'api.jobberwocky.dev'
+  ENV['FRONT_END_URL'] = 'localhost:8080'
 end

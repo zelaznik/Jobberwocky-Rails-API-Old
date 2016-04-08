@@ -40,6 +40,7 @@ gem 'omniauth-github'
 gem 'omniauth-facebook'
 
 # Sabisu gems
+gem 'sabisu_rails', github: "IcaliaLabs/sabisu-rails"
 gem 'compass-rails'
 gem 'furatto'
 gem 'font-awesome-rails'

@@ -10,9 +10,7 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
-EnvOrSecret = Hash.new do |h,k|
-  h[k] = ENV[k]
-end
+EnvOrSecret = Hash.new { |h,k| ENV[k] }
 
 module Jobberwocky
   class Application < Rails::Application
@@ -41,7 +39,7 @@ module Jobberwocky
 
     config.middleware.insert_before 'Rack::Runtime', 'Rack::Cors' do
       allow do
-        origins EnvOrSecret["FRONT_END_URL"]
+        origins '*' #EnvOrSecret["FRONT_END_URL"]
         resource '*', :headers => :any, :methods => [:get, :post, :delete, :options]
       end
     end

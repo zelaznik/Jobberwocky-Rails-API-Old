@@ -10,4 +10,7 @@ Jobberwocky::Application.configure do
   config.cache_classes = false
   config.consider_all_requests_local = true
   config.eager_load = false
+
+  ENV['ROOT_URL'] = 'api.jobberwocky.dev'
+  ENV['FRONT_END_URL'] = 'localhost:8080'
 end

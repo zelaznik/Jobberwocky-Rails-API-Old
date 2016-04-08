@@ -14,4 +14,7 @@ Jobberwocky::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   config.action_controller.perform_caching = true
+
+  # ENV['ROOT_URL'] =       Make sure these are
+  # ENV['FRONT_END_URL'] =  set in production.
 end
