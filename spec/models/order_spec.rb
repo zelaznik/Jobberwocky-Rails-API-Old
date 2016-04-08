@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Order do
-
   let(:p1) { FactoryGirl.create :product, price: 100 }
   let(:p2) { FactoryGirl.create :product, price: 85 }
   let(:order) { FactoryGirl.create :order, product_ids: [p1.id, p2.id] }
@@ -32,7 +31,7 @@ describe Order do
     it "builds 2 placements for the order" do
       expect do
         order.build_placements_with_product_ids_and_quantities(@ids_and_quantities)
-      end.to change { order.placements.size }.from(0).to(2)
+      end.to change { order.placements.size }.from(2).to(4)
     end
   end
 
