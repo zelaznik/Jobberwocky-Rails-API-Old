@@ -1,4 +1,4 @@
-class Static::JobApplicationsController < ApplicationController
+class Static::JobApplicationsController < Static::MainController
   before_action :set_job_application, only: [:show, :edit, :update, :destroy]
 
   # GET /static/job_applications

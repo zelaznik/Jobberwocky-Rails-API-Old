@@ -41,14 +41,14 @@ RSpec.configure do |config|
   config.order = "random"
 
   #Including to test requests
-  config.include Request::JsonHelpers, :type => :controller
-  config.include Request::HeadersHelpers, :type => :controller
-  config.include Devise::TestHelpers, :type => :controller
+  config.include Request::JsonHelpers, type: :controller, namespace: :api, format: :json
+  config.include Request::HeadersHelpers, type: :controller, namespace: :api, format: :json
+  config.include Devise::TestHelpers, type: :controller, namespace: :api, format: :json
 
   config.include EmailSpec::Helpers
   config.include EmailSpec::Matchers
 
-  config.before(:each, type: :controller) do
+  config.before(:each, type: :controller, namespace: :api) do
     include_default_accept_headers
   end
 end
