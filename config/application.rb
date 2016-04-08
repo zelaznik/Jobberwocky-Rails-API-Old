@@ -11,6 +11,18 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
+# Secrets.YML doesn't work with this old an edition
+# of Rails, so I had to roll my own, so to speak.
+def json_secrets
+  return @secrets unless @secrets.nil?
+
+  src = Rails.root.join('config', 'secrets.json')
+  @secrets ||= File.open(src, 'r') do |f|
+    all_values = JSON.parse(f.read)
+    all_values[Rails.env].freeze
+  end
+end
+
 module Jobberwocky
   class Application < Rails::Application
     config.generators do |g|

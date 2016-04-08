@@ -1,12 +1,11 @@
 class Api::V1::AuthController < ApplicationController
-  include SecretsHelper
   def github
     settings = {
         url: 'https://github.com/login/oauth/authorize',
         type: 'GET',
         query: {
             scope: 'user',
-            client_id: secrets_json["GITHUB_CLIENT_ID"],
+            client_id: json_secrets["GITHUB_CLIENT_ID"],
             state: Devise.friendly_token,
             redirect_uri: 'http://api.jobberwocky.dev/auth/callback'
         }
