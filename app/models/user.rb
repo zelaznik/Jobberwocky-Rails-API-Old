@@ -1,9 +1,10 @@
 class User < ActiveRecord::Base
   before_create :generate_authentication_token!
   devise :database_authenticatable, :registerable, :omniauthable,
-         :recoverable, :rememberable, :trackable, :validatable
-  validates :auth_token, uniqueness: true
+         :recoverable, :rememberable, :trackable, :validatable,
+         omniauth_providers: [:facebook, :github]
 
+  validates :auth_token, uniqueness: true
   has_many :products, dependent: :restrict_with_exception
   has_many :orders, dependent: :destroy
 
