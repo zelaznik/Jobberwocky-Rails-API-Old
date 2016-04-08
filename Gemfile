@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.1.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
@@ -27,6 +28,10 @@ group :test do
   gem "rspec-rails", "~> 2.14"
   gem "shoulda-matchers"
   gem "email_spec"
+end
+
+group :production do
+  gem 'rails_12factor'
 end
 
 gem "devise", '~> 3.2.4'

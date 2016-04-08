@@ -10,25 +10,8 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
-# This Rails Version Was Before secrets.yml so I made my own.
-def json_secrets
-  return @secrets unless @secrets.nil?
-  src = Rails.root.join('config', 'secrets.json')
-
-  @secrets ||= File.open(src, 'r') do |f|
-    all_values = JSON.parse(f.read)
-    all_values[Rails.env].freeze
-  end
-end
-
 EnvOrSecret = Hash.new do |h,k|
-  e = ENV[k]
-  j = json_secrets[k]
-  if (j.nil? || e.nil?)
-    h[k] = (e || j)
-  else
-    raise "The variable #{k} is specified more than once."
-  end
+  h[k] = ENV[k]
 end
 
 module Jobberwocky

@@ -12,8 +12,8 @@ describe OrderMailer do
       @order_mailer.should deliver_to(@user.email)
     end
 
-    it "should be set to be sent from no-reply@marketplace.com" do
-      @order_mailer.should deliver_from('info@jobberwocky.test')
+    it "should be set to be sent from info@jobberwocky.net" do
+      @order_mailer.should deliver_from("info@jobberwocky.net")
     end
 
     it "should contain the user's message in the mail body" do

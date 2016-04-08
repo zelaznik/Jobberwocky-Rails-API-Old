@@ -1,5 +1,5 @@
 class OrderMailer < ActionMailer::Base
-  default from: "info@#{EnvOrSecret['FRONT_END_URL']}"
+  default from: 'info@jobberwocky.net'
 
   def send_confirmation(order)
     @order = order
