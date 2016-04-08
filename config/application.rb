@@ -10,7 +10,9 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
-EnvOrSecret = Hash.new { |h,k| ENV[k] }
+EnvOrSecret = Hash.new do |h,k|
+  h[k] = ENV[k] unless ENV[k].nil?
+end
 
 module Jobberwocky
   class Application < Rails::Application
@@ -25,21 +27,10 @@ module Jobberwocky
     end
 
     config.i18n.enforce_available_locales = false
-
     config.autoload_paths += %W(#{config.root}/lib)
-
     config.middleware.insert_before 'Rack::Runtime', 'Rack::Cors' do
       allow do
-        origins '*'
-        resource '*',
-                 headers: :any,
-                 methods: [:get, :put, :post, :patch, :delete, :options]
-      end
-    end
-
-    config.middleware.insert_before 'Rack::Runtime', 'Rack::Cors' do
-      allow do
-        origins '*' #EnvOrSecret["FRONT_END_URL"]
+        origins 'localhost:8080', 'jobberwocky.dev', 'jobberwocky.net'
         resource '*', :headers => :any, :methods => [:get, :post, :delete, :options]
       end
     end

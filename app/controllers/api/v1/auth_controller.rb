@@ -6,8 +6,8 @@ class Api::V1::AuthController < ApplicationController
         query: {
             scope: 'user',
             state: Devise.friendly_token,
-            client_id: ENV["GITHUB_CLIENT_ID"],
-            redirect_uri: "http://#{ENV['ROOT_URL']}/auth/callback"
+            client_id: EnvOrSecret["GITHUB_CLIENT_ID"],
+            redirect_uri: "http://#{EnvOrSecret['ROOT_URL']}/auth/callback"
         }
     }
 
