@@ -1,6 +1,4 @@
 Jobberwocky::Application.configure do
-  ENV["GITHUB_CLIENT_ID"] = "5"
-
   # Overridden settings
   config.serve_static_assets = true
 
