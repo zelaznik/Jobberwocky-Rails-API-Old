@@ -33,7 +33,7 @@ class Static::JobApplicationsController < ApplicationController
   # PATCH/PUT /static/job_applications/1
   def update
     if @job_application.update(job_application_params)
-      redirect_to @job_application, notice: 'Job application was successfully updated.'
+      redirect_to static_job_applications_url(@job_application), notice: 'Job application was successfully updated.'
     else
       render action: 'edit'
     end

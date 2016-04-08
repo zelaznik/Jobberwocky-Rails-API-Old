@@ -77,7 +77,7 @@ describe Static::JobApplicationsController do
 
       it "redirects to the created job_application" do
         post :create, {:job_application => valid_attributes}, valid_session
-        response.should redirect_to(JobApplication.last)
+        response.should redirect_to static_job_applications_url(JobApplication.last)
       end
     end
 

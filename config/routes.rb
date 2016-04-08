@@ -8,7 +8,7 @@ Jobberwocky::Application.routes.draw do
   end
 
   namespace :api, defaults: { format: :json }, path: "/"  do
-    scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
+    scope module: :v1, constraints: ApiConstraints.new(version: 1) do
       match '*/*' => 'cors#preflight', :via => :options
 
       get 'auth/new', to: "auth#new"
