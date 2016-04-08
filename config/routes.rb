@@ -5,8 +5,11 @@ Jobberwocky::Application.routes.draw do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
       match '*/*' => 'cors#preflight', :via => :options
 
+      get 'auth/new', to: "auth#new"
+      get 'auth/callback', to: 'auth#callback'
+      devise_for :users, :controllers => { :omniauth_callbacks => "api/v1/callbacks" }
+
       resource :sessions, only: [:create, :destroy]
-      devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
       resources :users, only: [:show, :index, :create, :update, :destroy] do
         resources :products, only:  [:create, :update, :destroy]
         resources :orders, only: [:create, :index, :show]

@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
-  respond_to :json
   include Authenticable
+  respond_to :json
 
   def self.cors_allowed_actions
     @cors_allowed_actions ||= []
