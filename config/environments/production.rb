@@ -4,7 +4,7 @@ Jobberwocky::Application.configure do
   config.eager_load = true
   config.consider_all_requests_local = false
 
-  config.assets.js_compressor = :uglifier
+  # config.assets.js_compressor = :uglifier
   config.assets.compile = false
   config.assets.digest = true
   config.assets.version = '1.0'
