@@ -1,8 +1,5 @@
 Jobberwocky::Application.configure do
-  # Overridden settings
   config.serve_static_assets = true
-
-  # Out-of-the-box settings
   config.cache_classes = true
   config.eager_load = true
   config.consider_all_requests_local       = false
@@ -15,4 +12,5 @@ Jobberwocky::Application.configure do
   config.i18n.fallbacks = true
   config.active_support.deprecation = :notify
   config.log_formatter = ::Logger::Formatter.new
+
 end

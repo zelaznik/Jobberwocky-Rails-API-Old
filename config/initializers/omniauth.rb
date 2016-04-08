@@ -1,6 +1,6 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider  :github,
-            json_secrets["GITHUB_CLIENT_ID"],
-            json_secrets["GITHUB_CLIENT_SECRET"],
+            EnvOrSecret["GITHUB_CLIENT_ID"],
+            EnvOrSecret["GITHUB_CLIENT_SECRET"],
             scope: 'user:email'
 end

@@ -1,5 +1,5 @@
 class OrderMailer < ActionMailer::Base
-  default from: "no-reply@marketplace.com"
+  default from: "info@#{EnvOrSecret['FRONT_END_URL']}"
 
   def send_confirmation(order)
     @order = order

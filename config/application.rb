@@ -5,14 +5,12 @@ require "active_record/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
 require "sprockets/railtie"
-# require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
-# Secrets.YML doesn't work with this old an edition
-# of Rails, so I had to roll my own, so to speak.
+# This Rails Version Was Before secrets.yml so I made my own.
 def json_secrets
   return @secrets unless @secrets.nil?
 
@@ -20,6 +18,16 @@ def json_secrets
   @secrets ||= File.open(src, 'r') do |f|
     all_values = JSON.parse(f.read)
     all_values[Rails.env].freeze
+  end
+end
+
+EnvOrSecret = Hash.new do |h,k|
+  e = ENV[k]
+  j = json_secrets[k]
+  if (j.nil? || e.nil?)
+    h[k] = (e || j)
+  else
+    raise "The variable #{k} is specified more than once."
   end
 end
 
@@ -50,7 +58,7 @@ module Jobberwocky
 
     config.middleware.insert_before 'Rack::Runtime', 'Rack::Cors' do
       allow do
-        origins 'http://localhost:8080'
+        origins EnvOrSecret["FRONT_END_URL"]
         resource '*', :headers => :any, :methods => [:get, :post, :delete, :options]
       end
     end

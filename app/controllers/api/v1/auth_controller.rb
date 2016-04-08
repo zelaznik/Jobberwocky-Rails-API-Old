@@ -5,15 +5,14 @@ class Api::V1::AuthController < ApplicationController
         type: 'GET',
         query: {
             scope: 'user',
-            client_id: json_secrets["GITHUB_CLIENT_ID"],
             state: Devise.friendly_token,
-            redirect_uri: 'http://api.jobberwocky.dev/auth/callback'
+            client_id: EnvOrSecret["GITHUB_CLIENT_ID"],
+            redirect_uri: "http://#{EnvOrSecret['ROOT_URL']}/auth/callback"
         }
     }
 
-    key_val_pairs = settings[:query].to_a
-    query_string = URI.encode_www_form(key_val_pairs)
-    full_url = "#{settings[:url]}?#{query_string}"
+    key_val_pairs = settings[:query].map {|k,v| "#{k}=#{v}"}
+    full_url = "#{settings[:url]}?#{key_val_pairs.join('&')}"
     render json: {settings: settings, url: full_url}, status: 200
   end
 
@@ -26,6 +25,15 @@ class Api::V1::AuthController < ApplicationController
   end
 
   def callback
+    json_archive = '{
+        response: {
+            code: "bfa7761fbb621f5ab60a",
+            state: "Xmnc3WR-6M6Utt7rEm77",
+            format: "json",
+            controller: "api/v1/auth",
+            action: "callback"
+        }
+    }'
     render json: {response: params}, status: 200
   end
 end
