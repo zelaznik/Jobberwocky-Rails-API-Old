@@ -30,7 +30,7 @@ module Jobberwocky
     config.autoload_paths += %W(#{config.root}/lib)
     config.middleware.insert_before 'Rack::Runtime', 'Rack::Cors' do
       allow do
-        origins 'localhost:8080', '*jobberwocky.dev', '*jobberwocky.net'
+        origins 'http://www.localhost:8080', 'http://www.jobberwocky.dev', 'http://www.jobberwocky.net'
         resource '*', :headers => :any, :methods => [:get, :post, :delete, :options]
       end
     end
