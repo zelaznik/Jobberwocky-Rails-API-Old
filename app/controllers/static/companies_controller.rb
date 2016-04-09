@@ -21,7 +21,7 @@ class Static::CompaniesController < Static::MainController
 
   # POST /static/companies
   def create
-    @company = Company.new(static_company_params)
+    @company = Company.new(company_params)
 
     if @company.save
       redirect_to @company, notice: 'Company was successfully created.'
@@ -32,7 +32,7 @@ class Static::CompaniesController < Static::MainController
 
   # PATCH/PUT /static/companies/1
   def update
-    if @company.update(static_company_params)
+    if @company.update(company_params)
       redirect_to @company, notice: 'Company was successfully updated.'
     else
       render action: 'edit'
@@ -53,6 +53,6 @@ class Static::CompaniesController < Static::MainController
 
     # Only allow a trusted parameter "white list" through.
     def static_company_params
-      params.require(:static_company).permit(:name, :url)
+      params.require(:company).permit(:name, :url)
     end
 end

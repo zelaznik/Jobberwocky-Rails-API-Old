@@ -1,7 +1,7 @@
 require_relative '../lib/api_constraints.rb'
 
 Jobberwocky::Application.routes.draw do
-  namespace :static, path: "/static/", constraints: { format: :html } do
+  scope module: :static, constraints: { format: :html } do
     resources :job_applications
     resources :statuses
     resources :companies

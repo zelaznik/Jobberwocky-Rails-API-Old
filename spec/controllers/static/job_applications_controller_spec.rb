@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Static::JobApplicationsController do
-  let(:valid_attributes) { { "company" => "" } }
+  let(:valid_attributes) { {"company" => (FactoryGirl.build :company)} }
   let(:valid_session) { {} }
 
   describe "GET index" do
@@ -51,7 +51,7 @@ describe Static::JobApplicationsController do
 
       it "redirects to the created job_application" do
         post :create, {:job_application => valid_attributes}, valid_session
-        response.should redirect_to static_job_applications_url(JobApplication.last)
+        response.should redirect_to JobApplication.last
       end
     end
 
@@ -76,8 +76,8 @@ describe Static::JobApplicationsController do
     describe "with valid params" do
       it "updates the requested job_application" do
         job_application = JobApplication.create! valid_attributes
-        JobApplication.any_instance.should_receive(:update).with({ "company" => "" })
-        put :update, {:id => job_application.to_param, :job_application => { "company" => "" }}, valid_session
+        put :update, {:id => job_application.to_param, :job_application => {"company" => ""}}, valid_session
+        JobApplication.any_instance.should_receive(:update).with({"company" => ""})
       end
 
       it "assigns the requested job_application as @job_application" do
