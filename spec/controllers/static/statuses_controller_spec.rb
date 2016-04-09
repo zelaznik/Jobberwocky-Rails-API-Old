@@ -31,33 +31,33 @@ describe Static::StatusesController do
   let(:valid_session) { {} }
 
   describe "GET index" do
-    it "assigns all static_statuses as @statuses" do
+    it "assigns all statuses as @statuses" do
       status = Status.create! valid_attributes
       get :index, {}, valid_session
-      assigns(:static_statuses).should eq([status])
+      assigns(:statuses).should eq([status])
     end
   end
 
   describe "GET show" do
-    it "assigns the requested static_status as @status" do
+    it "assigns the requested status as @status" do
       status = Status.create! valid_attributes
       get :show, {:id => status.to_param}, valid_session
-      assigns(:static_status).should eq(status)
+      assigns(:status).should eq(status)
     end
   end
 
   describe "GET new" do
-    it "assigns a new static_status as @status" do
+    it "assigns a new status as @status" do
       get :new, {}, valid_session
-      assigns(:static_status).should be_a_new(Status)
+      assigns(:status).should be_a_new(Status)
     end
   end
 
   describe "GET edit" do
-    it "assigns the requested static_status as @status" do
+    it "assigns the requested status as @status" do
       status = Status.create! valid_attributes
       get :edit, {:id => status.to_param}, valid_session
-      assigns(:static_status).should eq(status)
+      assigns(:status).should eq(status)
     end
   end
 
@@ -65,34 +65,34 @@ describe Static::StatusesController do
     describe "with valid params" do
       it "creates a new Status" do
         expect {
-          post :create, {:static_status => valid_attributes}, valid_session
+          post :create, {:status => valid_attributes}, valid_session
         }.to change(Status, :count).by(1)
       end
 
-      it "assigns a newly created static_status as @status" do
-        post :create, {:static_status => valid_attributes}, valid_session
-        assigns(:static_status).should be_a(Status)
-        assigns(:static_status).should be_persisted
+      it "assigns a newly created status as @status" do
+        post :create, {:status => valid_attributes}, valid_session
+        assigns(:status).should be_a(Status)
+        assigns(:status).should be_persisted
       end
 
-      it "redirects to the created static_status" do
-        post :create, {:static_status => valid_attributes}, valid_session
+      it "redirects to the created status" do
+        post :create, {:status => valid_attributes}, valid_session
         response.should redirect_to(Status.last)
       end
     end
 
     describe "with invalid params" do
-      it "assigns a newly created but unsaved static_status as @status" do
+      it "assigns a newly created but unsaved status as @status" do
         # Trigger the behavior that occurs when invalid params are submitted
         Status.any_instance.stub(:save).and_return(false)
-        post :create, {:static_status => { "label" => "invalid value" }}, valid_session
-        assigns(:static_status).should be_a_new(Status)
+        post :create, {:status => { "label" => "invalid value" }}, valid_session
+        assigns(:status).should be_a_new(Status)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Status.any_instance.stub(:save).and_return(false)
-        post :create, {:static_status => { "label" => "invalid value" }}, valid_session
+        post :create, {:status => { "label" => "invalid value" }}, valid_session
         response.should render_template("new")
       end
     end
@@ -100,60 +100,60 @@ describe Static::StatusesController do
 
   describe "PUT update" do
     describe "with valid params" do
-      it "updates the requested static_status" do
+      it "updates the requested status" do
         status = Status.create! valid_attributes
-        # Assuming there are no other static_statuses in the database, this
+        # Assuming there are no other statuses in the database, this
         # specifies that the Status created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Status.any_instance.should_receive(:update).with({ "label" => "MyText" })
-        put :update, {:id => status.to_param, :static_status => { "label" => "MyText" }}, valid_session
+        put :update, {:id => status.to_param, :status => { "label" => "MyText" }}, valid_session
       end
 
-      it "assigns the requested static_status as @status" do
+      it "assigns the requested status as @status" do
         status = Status.create! valid_attributes
-        put :update, {:id => status.to_param, :static_status => valid_attributes}, valid_session
-        assigns(:static_status).should eq(status)
+        put :update, {:id => status.to_param, :status => valid_attributes}, valid_session
+        assigns(:status).should eq(status)
       end
 
-      it "redirects to the static_status" do
+      it "redirects to the status" do
         status = Status.create! valid_attributes
-        put :update, {:id => status.to_param, :static_status => valid_attributes}, valid_session
+        put :update, {:id => status.to_param, :status => valid_attributes}, valid_session
         response.should redirect_to(status)
       end
     end
 
     describe "with invalid params" do
-      it "assigns the static_status as @status" do
+      it "assigns the status as @status" do
         status = Status.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Status.any_instance.stub(:save).and_return(false)
-        put :update, {:id => status.to_param, :static_status => { "label" => "invalid value" }}, valid_session
-        assigns(:static_status).should eq(status)
+        put :update, {:id => status.to_param, :status => { "label" => "invalid value" }}, valid_session
+        assigns(:status).should eq(status)
       end
 
       it "re-renders the 'edit' template" do
         status = Status.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Status.any_instance.stub(:save).and_return(false)
-        put :update, {:id => status.to_param, :static_status => { "label" => "invalid value" }}, valid_session
+        put :update, {:id => status.to_param, :status => { "label" => "invalid value" }}, valid_session
         response.should render_template("edit")
       end
     end
   end
 
   describe "DELETE destroy" do
-    it "destroys the requested static_status" do
+    it "destroys the requested status" do
       status = Status.create! valid_attributes
       expect {
         delete :destroy, {:id => status.to_param}, valid_session
       }.to change(Status, :count).by(-1)
     end
 
-    it "redirects to the static_statuses list" do
+    it "redirects to the statuses list" do
       status = Status.create! valid_attributes
       delete :destroy, {:id => status.to_param}, valid_session
-      response.should redirect_to(static_statuses_url)
+      response.should redirect_to(statuses_url)
     end
   end
 
