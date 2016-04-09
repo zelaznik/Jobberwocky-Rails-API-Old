@@ -1,5 +1,5 @@
 class Static::CompaniesController < Static::MainController
-  before_action :set_static_company, only: [:show, :edit, :update, :destroy]
+  before_action :set_company, only: [:show, :edit, :update, :destroy]
 
   # GET /static/companies
   def index
@@ -42,17 +42,17 @@ class Static::CompaniesController < Static::MainController
   # DELETE /static/companies/1
   def destroy
     @company.destroy
-    redirect_to static_companies_url, notice: 'Company was successfully destroyed.'
+    redirect_to companies_url, notice: 'Company was successfully destroyed.'
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_static_company
+    def set_company
       @company = Company.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
-    def static_company_params
+    def company_params
       params.require(:company).permit(:name, :url)
     end
 end
