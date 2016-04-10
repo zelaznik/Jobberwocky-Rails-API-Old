@@ -1,10 +1,11 @@
 class Order < ActiveRecord::Base
-  validates :user_id, presence: true
-  before_save :set_total!
-
   belongs_to :user
   has_many :placements, dependent: :destroy
   has_many :products, through: :placements
+
+  validates :user_id, presence: true
+  validates_with EnoughProductsValidator
+  before_save :set_total!
 
   def total
     set_total!
