@@ -6,7 +6,7 @@ Jobberwocky::Application.routes.draw do
       match '*/*' => 'cors#preflight', :via => :options
 
       match 'auth/:provider/callback', to: 'auth#callback', via: [:get, :post]
-      match 'auth/failure', to: "auth#failure", via [:get, :post]
+      match 'auth/failure', to: "auth#failure", via: [:get, :post]
       match 'signout', to: 'sessions#destroy', as: 'signout', via: [:get, :post]
 
       resource :sessions, only: [:create, :destroy]
