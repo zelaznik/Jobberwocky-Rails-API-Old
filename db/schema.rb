@@ -11,10 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160408160122) do
+ActiveRecord::Schema.define(version: 20160703172747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "companies", force: true do |t|
+    t.string   "name"
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "companies", ["name"], name: "index_companies_on_name", using: :btree
+
+  create_table "job_applications", force: true do |t|
+    t.integer  "company_id"
+    t.integer  "user_id"
+    t.string   "job_title"
+    t.string   "url"
+    t.date     "first_applied"
+    t.date     "last_update"
+    t.integer  "status_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "job_applications", ["company_id"], name: "index_job_applications_on_company_id", using: :btree
+  add_index "job_applications", ["status_id"], name: "index_job_applications_on_status_id", using: :btree
+  add_index "job_applications", ["user_id"], name: "index_job_applications_on_user_id", using: :btree
 
   create_table "orders", force: true do |t|
     t.integer  "user_id"
@@ -48,6 +73,14 @@ ActiveRecord::Schema.define(version: 20160408160122) do
 
   add_index "products", ["user_id"], name: "index_products_on_user_id", using: :btree
 
+  create_table "statuses", force: true do |t|
+    t.text     "label"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "statuses", ["label"], name: "index_statuses_on_label", unique: true, using: :btree
+
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -64,6 +97,8 @@ ActiveRecord::Schema.define(version: 20160408160122) do
     t.string   "auth_token",             default: ""
     t.string   "provider"
     t.string   "uid"
+    t.string   "name"
+    t.datetime "auth_expires_at"
   end
 
   add_index "users", ["auth_token"], name: "index_users_on_auth_token", unique: true, using: :btree
