@@ -3,8 +3,9 @@ require_relative '../lib/api_constraints.rb'
 Jobberwocky::Application.routes.draw do
   namespace :api, defaults: { format: :json }, path: "/"  do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
-      match '*/*' => 'cors#preflight', :via => :options
+      match '*all' => 'cors#preflight', via: [:options]
 
+      get 'auth/new', to: 'auth#new'
       match 'auth/:provider/callback', to: 'auth#callback', via: [:get, :post]
       match 'auth/failure', to: "auth#failure", via: [:get, :post]
       match 'signout', to: 'sessions#destroy', as: 'signout', via: [:get, :post]
